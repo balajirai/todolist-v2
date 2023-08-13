@@ -3,7 +3,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const _ = require("lodash");
-const {connectDB } = require("./connectDB");
 
 const app = express();
 
@@ -13,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 // connecting to database
-connectDB();
+mongoose.connect(process.env.CONNECTION_URL);
 
 // schema 
 const itemSchema = {
@@ -147,7 +146,7 @@ app.get("/about", function (req, res) {
   res.render("about");
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`server running on port ${PORT}`);
