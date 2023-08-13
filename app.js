@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const _ = require("lodash");
+const { connectDB } = require("./connectDB");
 
 const app = express();
 
@@ -12,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 // connecting to database
-mongoose.connect(process.env.CONNECTION_URL);
+connectDB();
 
 // schema 
 const itemSchema = {
